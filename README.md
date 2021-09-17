@@ -4,9 +4,9 @@
 
 |Column              |Type    |Options                  |
 |--------------------|--------|-------------------------|
-|nickname            |string  |null:false, unique:true  |
+|nickname            |string  |null:false               |
 |email               |string  |null:false, unique:true  |
-|password            |string  |null:false               |
+|encrypted_password  |string  |null:false               |
 |family_name         |string  |null:false               |
 |first_name          |string  |null:false               |
 |family_name_kana    |string  |null:false               |
@@ -24,17 +24,17 @@ has_one :items_history, dependent: :destroy
 
 ##itemsテーブル
 
-|Column         |Type     |Options                       |
-|---------------|---------|------------------------------|
-|name           |string   |null:false                    |
-|text           |text     |null:false                    |
-|category       |string   |null:false                    |
-|status         |string   |null:false                    |
-|load           |string   |null:false                    |
-|delivery_area  |string   |null:false                    |
-|delivery_days  |string   |null:false                    |
-|price          |integer  |null:false                    |
-|user_id        |string   |null:false, foreign_key:true  |
+|Column            |Type        |Options                       |
+|------------------|------------|------------------------------|
+|name              |string      |null:false                    |
+|text              |text        |null:false                    |
+|category_id       |integer     |null:false                    |
+|status_id         |integer     |null:false                    |
+|load_id           |integer     |null:false                    |
+|delivery_area_id  |integer     |null:false                    |
+|delivery_days_id  |integer     |null:false                    |
+|price             |integer     |null:false                    |
+|user              |references  |null:false, foreign_key:true  |
 <!-- imageはActiveStorageで実装 -->
 
 
@@ -43,35 +43,34 @@ belongs_to :user
 has_one :items_history, dependent: :destroy
 
 
-##items_historyテーブル
+##items_historiesテーブル
 
-|Column            |Type    |Options                       |
-|------------------|--------|------------------------------|
-|user_id           |string  |null:false, foreign_key:true  |
-|items_id          |string  |null:false, foreign_key:true  |
+|Column            |Type        |Options                       |
+|------------------|------------|------------------------------|
+|user              |references  |null:false, foreign_key:true  |
+|item              |references  |null:false, foreign_key:true  |
 
 
 
 ### Association
 belongs_to :user
-belongs_to :items
+belongs_to :item
 belongs_to :destination
 
 
 
-##destinationテーブル
+##destinationsテーブル
 
-|Column            |Type    |Options                      |
-|------------------|--------|-----------------------------|
-|post_code         |string  |null:false                   |
-|prefecture        |string  |null:false                   |
-|city              |string  |null:false                   |
-|address           |string  |null:false                   |
-|building_name     |string  |                             |
-|phone_number      |date    |null:false                   |
-|user_id           |string  |null:false, foreign_key:true |
+|Column             |Type        |Options                      |
+|-------------------|------------|-----------------------------|
+|post_code          |string      |null:false                   |
+|delivery_area_id   |integer     |null:false                   |
+|city               |string      |null:false                   |
+|address            |string      |null:false                   |
+|building_name      |string      |                             |
+|phone_number       |string      |null:false                   |
+|items_history      |references  |null:false, foreign_key:true |
 
 
 ### Association
-belongs_to :user
 has_one :items_history, dependent: :destroy

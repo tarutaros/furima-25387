@@ -16,7 +16,7 @@
 
 ### Association
 has_many :items, dependent: :destroy
-has_one :destination, dependent: :destroy
+has_many :items_histories, dependent: :destroy
 
 
 
@@ -52,8 +52,9 @@ has_one :items_history, dependent: :destroy
 
 
 ### Association
-belongs_to :destination
+has_one :destination
 belongs_to :item
+belongs_to :user
 
 
 
@@ -72,5 +73,4 @@ belongs_to :item
 
 
 ### Association
-belongs_to :user
-has_one :items_history, dependent: :destroy
+belongs_to :items_history, dependent: :destroy

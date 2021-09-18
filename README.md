@@ -52,9 +52,9 @@ has_one :items_history, dependent: :destroy
 
 
 ### Association
-
+belongs_to :destination
 belongs_to :item
-has_one :destination, dependent: :destroy
+
 
 
 
@@ -72,4 +72,5 @@ has_one :destination, dependent: :destroy
 
 
 ### Association
-belongs_to :items_history
+belongs_to :user
+has_one :items_history, dependent: :destroy

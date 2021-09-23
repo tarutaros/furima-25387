@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  has_many :items, dependent: :destroy
+  # has_many :items, dependent: :destroy
 
   with_options presence: true do
     validates :nickname
@@ -17,6 +17,4 @@ class User < ApplicationRecord
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i
   validates :password, format:{with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください'  }
   
-  EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/
-  validates :email, presence: true, format: {with: EMAIL_REGEX}
 end

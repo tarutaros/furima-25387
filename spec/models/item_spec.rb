@@ -73,6 +73,16 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is out of setting range")
       end
+      it 'priceが英字では保存できない' do
+        @item.price = 'aaaa'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters")
+      end
+      it 'priceが英数字混合では保存できない' do
+        @item.price = 'aaa999'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters")
+      end
       it "userが紐づいていなければ出品できない" do
         @item.user = nil
         @item.valid?

@@ -29,27 +29,27 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Text can't be blank")
       end
       it "category_idが未選択だと出品できない" do
-        @item.category_id = nil
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it "status_idが未選択だと出品できない" do
-        @item.status_id = nil
+        @item.status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Status can't be blank")
       end
       it "load_idが未選択だと出品できない" do
-        @item.load_id = nil
+        @item.load_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Load can't be blank")
       end
       it "delivery_area_idが未選択だと出品できない" do
-        @item.delivery_area_id = nil
+        @item.delivery_area_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery area can't be blank")
       end
       it "delivery_days_idが未選択だと出品できない" do
-        @item.delivery_days_id = nil
+        @item.delivery_days_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery days can't be blank")
       end
@@ -72,6 +72,11 @@ RSpec.describe Item, type: :model do
         @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is out of setting range")
+      end
+      it "userが紐づいていなければ出品できない" do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
       end
     end
   end

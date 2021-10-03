@@ -6,8 +6,8 @@ class Item < ApplicationRecord
   belongs_to :category
   belongs_to :status
   belongs_to :load
-  belongs_to :area
-  belongs_to :days
+  belongs_to :delivery_area
+  belongs_to :delivery_days
 
   with_options presence: true do
     validates :image

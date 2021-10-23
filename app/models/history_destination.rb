@@ -20,6 +20,6 @@ class HistoryDestination
   
   def save
     items_history = ItemsHistory.create(user_id: user_id, item_id: item_id)
-    Destination.create(post_code: post_code, delivery_area_id: delivery_area_id, city: city, address: address, building_name: building_name, phone_number: phone_number, items_history: items_history)
+    Destination.create(post_code: post_code, delivery_area_id: delivery_area_id, city: city, address: address, building_name: building_name, phone_number: phone_number, items_history_id: items_history.id)
   end
 end

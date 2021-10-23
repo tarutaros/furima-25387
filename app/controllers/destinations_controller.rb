@@ -21,7 +21,7 @@ class DestinationsController < ApplicationController
   private
 
   def destination_params
-    params.require(:history_destination).permit(:post_code, :delivery_area_id, :city, :address, :building_name, :phone_number).merge(token: params[:token], user_id: current_user.id, item_id: @item.id)
+    params.require(:history_destination).permit(:post_code, :delivery_area_id, :city, :address, :building_name, :phone_number).merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id])
   end
 
   def set_item

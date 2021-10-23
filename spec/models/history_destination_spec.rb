@@ -35,6 +35,11 @@ RSpec.describe HistoryDestination, type: :model do
         @history_destination.valid?
         expect(@history_destination.errors.full_messages).to include("Post code is invalid. Enter it as follows(e.g. 123-4567)")
       end
+      it 'post_codeに半角ハイフンがないと購入できない' do
+        @history_destination.post_code = '1750092'
+        @history_destination.valid?
+        expect(@history_destination.errors.full_messages).to include("Post code is invalid. Enter it as follows(e.g. 123-4567)")
+      end
       it 'delivery_area_idが未選択だと購入できない' do
         @history_destination.delivery_area_id = 1
         @history_destination.valid?
@@ -52,6 +57,11 @@ RSpec.describe HistoryDestination, type: :model do
       end
       it 'phone_numberが短いと購入できない' do
         @history_destination.phone_number = '080336422'
+        @history_destination.valid?
+        expect(@history_destination.errors.full_messages).to include("Phone number is too short")
+      end
+      it 'phone_numberが12ケタ以上だと購入できない' do
+        @history_destination.phone_number = '080336422731'
         @history_destination.valid?
         expect(@history_destination.errors.full_messages).to include("Phone number is too short")
       end

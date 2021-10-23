@@ -1,7 +1,7 @@
 class DestinationsController < ApplicationController
   before_action :set_item, only: [:index, :create]
   before_action :authenticate_user!
-  before_action :move_to_index, except: [:index, :create]
+  before_action :move_to_index, only: [:index, :create]
 
   def index
     @history_destination = HistoryDestination.new

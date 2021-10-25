@@ -1,4 +1,4 @@
 class Destination < ApplicationRecord
-  belongs_to :items_history
+  belongs_to :items_history, dependent: :destroy
 
 end
